@@ -2,9 +2,11 @@ class PodcastsController < ApplicationController
 	require 'rss'
 	require 'open-uri'
 	skip_before_action :verify_authenticity_token, :only => [:index, :fetch_rss]
+	
 	def index
 		render plain: 'Hello, World!'
 	end
+	
 	def fetch_rss
 		url = session[:podcast_rss_url]
 		data = JSON.parse(request.body.read)
