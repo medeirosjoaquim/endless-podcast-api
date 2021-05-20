@@ -1,6 +1,8 @@
 class PodcastsController < ApplicationController
-	require 'rss'
-	require 'open-uri'
+
+	require "rss"
+	require "open-uri"
+
 	skip_before_action :verify_authenticity_token, :only => [:index, :fetch_rss]
 	
 	def index
@@ -14,7 +16,7 @@ class PodcastsController < ApplicationController
 		puts(data['url'])
 				begin
 			@rss = RSS::Parser
-          .parse(open(data['url'])
+          .parse(URI.open(data['url'])
           .read, false).items[0..5]
 		rescue => e
 			puts(e)
