@@ -12,7 +12,7 @@ gem 'pg'
 
 gem 'rack-cors'
 
-
+gem 'redis'
 # Use Puma as the app server
 gem 'puma', '~> 5.0'
 # Use SCSS for stylesheets

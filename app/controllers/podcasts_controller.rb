@@ -12,6 +12,13 @@ class PodcastsController < ApplicationController
 	def fetch_rss
 		url = session[:podcast_rss_url]
 		data = JSON.parse(request.body.read)
+		data['url']
+		Rails.cache.fetch("podcast_#{data['url']}")
+		podcast = Podcast.where(url: data['url']).take
+		if podcast
+			render json: podcast
+		else 
+
 		rss_results = []
 		puts(data['url'])
 				begin
@@ -33,6 +40,7 @@ class PodcastsController < ApplicationController
 			response = rss_results
 			puts (@rss)
 		end
-		render json: {data: rss_results}
+		Rails.cache.write("podcast_#{data['url']}", rss_results)
+		render json: rss_results
 	end
 end
