@@ -26,7 +26,7 @@ class PodcastsController < ApplicationController
     begin
       @rss = RSS::Parser
           .parse(URI.open(data['url'])
-          .read, false).items[0..5]
+          .read, false)
     rescue => e
       puts(e)
       session[:podcast_rss_url] = nil
