@@ -70,7 +70,7 @@ class PodcastsController < ApplicationController
         summary: podcast.summary,
         keywords: podcast.keywords,
         category: podcast.category,
-				feed: podcast.rss_results
+				feed: podcast.feed
 			}
     else
       #render plain: 'no data'
