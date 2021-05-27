@@ -65,9 +65,6 @@ class PodcastsController < ApplicationController
     podcast = Podcast.where(url: data['url']).take
 
     if podcast
-			puts("=====================")
-			puts("=====================")
-			puts("from DB")
       render json: podcast
     else
       #render plain: 'no data'
@@ -90,9 +87,6 @@ class PodcastsController < ApplicationController
 				end
 				#response = rss_results
 			end
-			puts("=====================")
-			puts("=====================")
-			puts("from http")
 			title = rss.channel.title
 			summary = rss.channel.itunes_summary
 			keywords = rss.channel.itunes_keywords
@@ -104,7 +98,13 @@ class PodcastsController < ApplicationController
 			keywords: keywords,
 			feed: rss_results
 			).save
-			render json: rss.channel.title
+			render json: {
+				title,
+        summary,
+        keywords,
+        category,
+				rss_results
+			}
     end
 
     
