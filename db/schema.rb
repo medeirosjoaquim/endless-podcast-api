@@ -15,23 +15,15 @@ ActiveRecord::Schema.define(version: 2021_05_27_011654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "feeds", force: :cascade do |t|
+  create_table "podcasts", force: :cascade do |t|
+    t.string "title"
     t.string "url"
+    t.string "category"
+    t.string "summary"
+    t.string "keywords", default: [], array: true
     t.jsonb "feed"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "podcast_id"
-    t.index ["podcast_id"], name: "index_feeds_on_podcast_id"
-  end
-
-  create_table "podcasts", force: :cascade do |t|
-    t.string "name"
-    t.string "url"
-    t.string "theme"
-    t.jsonb "data"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.string "feed_url"
   end
 
 end
