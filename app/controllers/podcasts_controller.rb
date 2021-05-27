@@ -65,7 +65,13 @@ class PodcastsController < ApplicationController
     podcast = Podcast.where(url: data['url']).take
 
     if podcast
-      render json: podcast
+      render json: {
+				title: podcast.title,
+        summary: podcast.summary,
+        keywords: podcast.keywords,
+        category: podcast.category,
+				feed: podcast.rss_results
+			}
     else
       #render plain: 'no data'
 			begin
@@ -99,11 +105,11 @@ class PodcastsController < ApplicationController
 			feed: rss_results
 			).save
 			render json: {
-				title,
-        summary,
-        keywords,
-        category,
-				rss_results
+				title: title,
+        summary: summary,
+        keywords: keywords,
+        category: category,
+				feed: rss_results
 			}
     end
 
