@@ -24,6 +24,8 @@ class PodcastsController < ApplicationController
     end
 
     begin
+      #url.prepend "http://" unless url.start_with?('http://', 'https://')
+
       @rss = RSS::Parser
           .parse(URI.open(data['url'])
           .read, false)
