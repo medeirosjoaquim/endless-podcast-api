@@ -10,7 +10,6 @@ class PodcastsController < ApplicationController
   end
   
   def fetch_rss
-    #url = session[:podcast_rss_url]
     data = JSON.parse(request.body.read)
     rss_results = []
     url = data['url']
