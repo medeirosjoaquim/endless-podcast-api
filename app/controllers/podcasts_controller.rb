@@ -31,7 +31,7 @@ class PodcastsController < ApplicationController
 						.parse(URI.open(url)
 						.read, false)
         
-				feed = rss.items[0..5]
+				feed = rss.items
 			rescue => e
 				puts(e)
 				render plain: 'Not Found', :status => '404'
