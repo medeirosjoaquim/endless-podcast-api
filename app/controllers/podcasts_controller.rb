@@ -34,8 +34,9 @@ class PodcastsController < ApplicationController
 				feed = rss.items
 			rescue => e
 				puts(e)
-				render plain: 'Not Found', :status => '404'
+				render plain: 'Not Found', :status => '404' and return
 			else 
+				
 				feed.each do |result|
 					result = { title: result.title,
 						date: result.pubDate,
@@ -43,6 +44,7 @@ class PodcastsController < ApplicationController
 						description: result.description,
 						audio_url: result.enclosure.url }
 					rss_results.push(result)
+				end
 					title = rss.channel.title
 					summary = rss.channel.itunes_summary
 					keywords = rss.channel.itunes_keywords
@@ -61,9 +63,8 @@ class PodcastsController < ApplicationController
 						keywords: keywords,
 						category: category,
 						feed: rss_results
-					}
+					} and return
 				end
 			end
     end
   end
-end
