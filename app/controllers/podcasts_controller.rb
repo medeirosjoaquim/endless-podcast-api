@@ -6,7 +6,8 @@ class PodcastsController < ApplicationController
   skip_before_action :verify_authenticity_token, :only => [:index, :fetch_rss]
   
   def index
-    render plain: 'Hello, World!'
+		@podcasts = Podcast.all
+    render json: @podcasts
   end
   
   def fetch_rss
