@@ -68,4 +68,8 @@ class PodcastsController < ApplicationController
 				end
 			end
     end
+		def list
+			@podcasts_list = Podcast.all.map{|p| {id: p.id, title: p.title, summary: p.summary}}
+      render json: @podcasts_list	
+		end
   end
